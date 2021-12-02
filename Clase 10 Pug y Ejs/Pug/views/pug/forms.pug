@@ -1,0 +1,15 @@
+extends template
+
+block formProds 
+  br
+  br
+  h2(style="text-align: center; margin-top: 50px") Ingrese producto
+  form(style="width:450px; margin: 5% auto 0 auto;", class="prod-form", id="add", action="/productos", method="POST")
+    div(class="d-flex flex-column align-items-center")
+      input(type="text", name="title", class="form-control", placeholder="Nombre del Producto", style="margin-bottom: 10px;")
+      input(type="text" name="price" class="form-control" placeholder="Precio del Producto" style="margin-bottom: 10px;")
+      input(type="text" name="thumbnail" class="form-control" placeholder="Thumbnail del Producto" style="margin-bottom: 10px;")
+      div(style="display: flex;")
+        button(type="submit", class="btn btn-primary") Ingresar Producto
+        a(href="/productos", style="margin-left: 30px;", type="submit", class="btn btn-primary") Ver Productos
+      

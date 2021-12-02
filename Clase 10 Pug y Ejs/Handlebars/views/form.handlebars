@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+  <br>
+  <br>
+
+  <h2 style="text-align: center; margin-top: 50px">Ingrese producto</h2>
+  <form style="width:450px; margin: 5% auto 0 auto;" class="prod-form" id="add" action="/productos" method="POST">
+    <div class="d-flex flex-column align-items-center">
+      <input type="text" name="title" class="form-control" placeholder="Nombre del Producto"
+        style="margin-bottom: 10px;">
+      <input type="text" name="price" class="form-control" placeholder="Precio del Producto"
+        style="margin-bottom: 10px;">
+      <input type="text" name="thumbnail" class="form-control" placeholder="Thumbnail del Producto"
+        style="margin-bottom: 10px;">
+      <div style="display: flex;">
+        <button type="submit" class="btn btn-primary">Ingresar Producto</button>
+        <a href="/productos" style="margin-left: 30px;" type="submit" class="btn btn-primary">Ver Productos</a>
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>

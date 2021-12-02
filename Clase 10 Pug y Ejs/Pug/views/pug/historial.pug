@@ -1,0 +1,25 @@
+extends template 
+
+block historial
+  br
+  br
+  div
+    h2(style="text-align: center;")="Historial"
+     if (personas.length> 0)
+      table(style="width: 900px; margin: 0 auto;", class="table table-dark table-hover")
+        tr
+          th="Id#"
+          th="Producto"
+          th="Precio"
+          th="urlThumbnail" 
+          for person in personas
+            tr
+              td #{person.id}
+              td #{person.title}
+              td #{person.price}
+              td #{person.thumbnail}
+     else
+      p(class="alert alert-danger")="No se encontro data, lo siento!"
+
+    div(style="margin: 30px auto; text-align: center;")
+      a(href="/" class="btn btn-primary" type="submit")="Ingresar Productos"
