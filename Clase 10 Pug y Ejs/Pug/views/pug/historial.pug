@@ -17,7 +17,8 @@ block historial
               td #{person.id}
               td #{person.title}
               td #{person.price}
-              td #{person.thumbnail}
+              td
+                img(src=person.thumbnail) 
      else
       p(class="alert alert-danger")="No se encontro data, lo siento!"
 
