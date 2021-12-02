@@ -1,0 +1,5 @@
+# Por escrito, indicar cuál de los tres motores de plantillas prefieres para tu proyecto y por qué.
+
+Personalmente eligiria handlebars por resultarme mas familiar ya que vengo de los cursos de front y son mas "front-friendly" por asi decir, usa
+sintaxis mas conocidas y facil de integrar con el proyecto. Por el momento con este desafio el manejo de los datos fue relativamente comprensible y 
+eso suma bastante por lo que hace que prefiera handlebars por el momento.
