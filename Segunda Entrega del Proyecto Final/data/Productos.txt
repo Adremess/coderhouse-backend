@@ -1,0 +1,62 @@
+[
+  {
+    "nombre": "Jabon Liquido Ariel",
+    "descripcion": "Jabon Liquido Concentrado 8 Lavados",
+    "foto": "https://eistore.vteximg.com.br/arquivos/ids/157278-690-690/7.jpg?v=637363844538070000",
+    "precio": 640.92,
+    "stock": 3,
+    "id": 1,
+    "timestamp": "12/15/2021, 2:10:30 AM",
+    "codigo": 92
+  },
+  {
+    "nombre": "Moto G100 128 GB",
+    "descripcion": "azul nimbus 8 GB RAM",
+    "foto": "https://http2.mlstatic.com/D_NQ_NP_645703-MLA46248898134_062021-O.webp",
+    "precio": 97,
+    "stock": 7,
+    "id": 2,
+    "timestamp": "12/15/2021, 2:13:31 AM",
+    "codigo": 540
+  },
+  {
+    "nombre": "House Of X - 1",
+    "descripcion": "Comics En Ingles",
+    "foto": "https://http2.mlstatic.com/D_NQ_NP_662993-MLA44947732926_022021-O.webp",
+    "precio": 750,
+    "stock": 12,
+    "id": 3,
+    "timestamp": "12/15/2021, 2:14:34 AM",
+    "codigo": 258
+  },
+  {
+    "nombre": "Smart Tv Samsung",
+    "descripcion": "Series 4 Led Hd 32",
+    "foto": "https://http2.mlstatic.com/D_NQ_NP_934496-MLA45625835121_042021-O.webp",
+    "precio": 29.999,
+    "stock": 18,
+    "id": 4,
+    "timestamp": "12/15/2021, 2:16:25 AM",
+    "codigo": 676
+  },
+  {
+    "nombre": "Microsoft Xbox",
+    "descripcion": "Series 5 512gb Standard Color Blanco",
+    "foto": "https://http2.mlstatic.com/D_NQ_NP_627149-MLA44484230438_012021-O.webp",
+    "precio": 94.999,
+    "stock": 7,
+    "id": 5,
+    "timestamp": "12/15/2021, 2:17:34 AM",
+    "codigo": 909
+  },
+  {
+    "nombre": "Vino",
+    "descripcion": "Regalo Caja Navidenia Luigi Bosca Mlabec Rutini",
+    "foto": "https://http2.mlstatic.com/D_NQ_NP_720926-MLA48499623576_122021-O.webp",
+    "precio": 3.769,
+    "stock": 28,
+    "id": 6,
+    "timestamp": "12/15/2021, 2:18:39 AM",
+    "codigo": 971
+  }
+]
