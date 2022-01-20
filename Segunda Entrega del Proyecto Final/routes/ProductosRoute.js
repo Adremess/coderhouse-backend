@@ -1,10 +1,12 @@
 import express from 'express';
 import { productos as ProdsApi } from '../handlers/dbCheck.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const router = express.Router();
 
 const validateIsAdmin = (req, res, next) => {
-  if (req.headers.isadmin !== 'false') {
+  if (process.env.ADMIN !== 'false') {
     next();
   } else {
     res.json({
