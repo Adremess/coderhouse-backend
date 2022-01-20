@@ -2,9 +2,11 @@ import express from 'express';
 import NotFound from './routes/NotFound.js';
 import productosRoute from './routes/ProductosRoute.js';
 import carritoRoute from './routes/CarritoRoute.js';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 // S E T T I N G S
 app.use(express.json());

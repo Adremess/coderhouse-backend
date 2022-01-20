@@ -1,5 +1,5 @@
 import express from 'express';
-import Carrito from '../handlers/carritoHandler.js';
+import Carrito from '../handlers/filesystem/carritoHandler.js';
 
 const router = express.Router();
 const carritoHandler = new Carrito('Carrito');

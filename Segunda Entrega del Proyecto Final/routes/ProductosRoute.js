@@ -1,8 +1,7 @@
 import express from 'express';
-import Productos from '../handlers/productosHandler.js';
+import { productos as ProdsApi } from '../handlers/dbCheck.js';
 
 const router = express.Router();
-export const ProductosHandler = new Productos();
 
 const validateIsAdmin = (req, res, next) => {
   if (req.headers.isadmin !== 'false') {
@@ -17,9 +16,9 @@ const validateIsAdmin = (req, res, next) => {
 
 router.get('/:id?', async (req, res) => {
   try {
-    req.params.id ?
-      res.json(await ProductosHandler.getProductById(req.params.id))
-      : res.json(await ProductosHandler.getProducts().catch(err => console.log(err)));
+    req.params.id ? 
+      res.json(await ProdsApi.getProductById(req.params.id))
+      : res.json(await ProdsApi.getProducts());
   } catch (err) {
     throw new Error(err.message);
   }
@@ -27,7 +26,7 @@ router.get('/:id?', async (req, res) => {
 
 router.post('/', validateIsAdmin, async (req, res) => {
   try {
-    res.json(await ProductosHandler.saveProduct(req.body))
+    res.json(await ProdsApi.saveProduct(req.body))
   } catch (err) {
     console.log(err.message);
   }
@@ -35,7 +34,7 @@ router.post('/', validateIsAdmin, async (req, res) => {
 
 router.put('/:id', validateIsAdmin, async (req, res) => {
   try {
-    res.json(await ProductosHandler.updateProduct(req.params.id, req.body));
+    res.json(await ProdsApi.updateProduct(req.params.id, req.body));
   } catch (error) {
     throw new Error(err.message);
   }
@@ -43,7 +42,7 @@ router.put('/:id', validateIsAdmin, async (req, res) => {
 
 router.delete('/:id', validateIsAdmin, async (req, res) => {
   try {
-    res.json(await ProductosHandler.deleteProduct(req.params.id));
+    res.json(await ProdsApi.deleteProduct(req.params.id));
 
   } catch (err) {
     throw new Error(err.message);
