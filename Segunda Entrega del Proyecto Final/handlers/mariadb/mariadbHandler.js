@@ -94,5 +94,4 @@ class Productos {
   };
 };
 
-export function Hola() {console.log('holis')};
 export default new Productos('ProductosMaria');

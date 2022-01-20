@@ -35,7 +35,7 @@ router.post('/', validateIsAdmin, async (req, res) => {
 router.put('/:id', validateIsAdmin, async (req, res) => {
   try {
     res.json(await ProdsApi.updateProduct(req.params.id, req.body));
-  } catch (error) {
+  } catch (err) {
     throw new Error(err.message);
   }
 });
