@@ -14,6 +14,17 @@
 <body>
   <br>
   <br>
+  <div style="display: flex; justify-content: space-between" class="alert alert-success" role="alert">
+    <div>
+      <h1 class="text=left">Bienvenido <%= usuario.username %>!</h1>
+      <p>Has entrado <%= contador %> veces</p>
+    </div>
+    <div style="width: 12%; height: 40%; margin: auto 0; text-align: center;">
+      <button style="text-align: center;" onclick="location.href='logout'" type="button" class="btn btn-warning text-right">Logout</button>
+    </div>
+  </div>
+  <br>
+  <br>
 
   <h2 style="text-align: center; margin-top: 50px">Ingrese producto</h2>
   <form style="width:450px; margin: 5% auto 0 auto;" class="prod-form" id="add" action="/productos" method="POST">
@@ -26,7 +37,6 @@
         style="margin-bottom: 10px;">
       <div style="display: flex;">
         <button id="formBtn" type="submit" class="btn btn-primary">Ingresar Producto</button>
-        <a href="/productos" style="margin-left: 30px;" type="submit" class="btn btn-primary">Ver Productos</a>
       </div>
     </div>
   </form>
@@ -37,35 +47,21 @@
   <br>
 
 
-<div>
-  {{#if data }}
-  <h1 style="text-align: center;">Productos Cargados</h1>
-    <table style="width: 900px; margin: 0 auto;" class="table table-dark table-hover">
-      <thead>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Foto</th>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-    {{else}}
-      <p class="alert alert-danger">No se encontro data, lo siento!</p>
-  {{/if}}
-</div>
-
-<div class="card">
-  <div class="card-header">
-    Chat Grupal
+  <div id="lista-productos">
+    <% if (data.length> 0) { %>
+      <h1 style="text-align: center;">Productos Cargados</h1>
+      <table style="width: 900px; margin: 0 auto;" class="table table-dark table-hover">
+        <thead>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Foto</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <% } else { %>
+        <p class="alert alert-danger" id="alerta-no-encontrado">No se encontro data, lo siento!</p>
+        <% } %>
   </div>
-  <div class="card-body">
-    <input class="form-control col-md-3" id="chat-mail" type="text" placeholder="email@email.com">
-    <p class="card-text border col-md-8 mt-4" id="chat-box"></p>
-    <div class="d-inline-flex">
-      <input class="form-control col-md-12 mr-2" id="chat-msg" type="text" placeholder="Ingresa un mensaje...">
-      <a href="#" class="btn btn-primary col-md-6" id="chat-btn">Enviar!</a>
-    </div>
-  </div>
-</div>
 
   <script src="scripts/ioHandler.js"></script>
 </body>

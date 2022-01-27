@@ -16,7 +16,7 @@ class ApiHandler {
 
   deleteProductById({ id }) {
     let exist = false;
-    for(let i = 0; i < this.productos.length; i++) {
+    for (let i = 0; i < this.productos.length; i++) {
       if (Number(this.productos[i].id) === Number(id)) {
         this.productos.splice(i, 1);
         exist = true;
@@ -27,20 +27,20 @@ class ApiHandler {
   }
 
   addProduct(product) {
-    const {title, price, thumbnail} = product;
+    const { title, price, thumbnail } = product;
     let id = 0;
     if (this.productos.length < 1) {
       id = 1;
-      this.productos.push({id, title, price, thumbnail});
+      this.productos.push({ id, title, price, thumbnail });
     } else {
       id = this.productos[this.productos.length - 1].id + 1;
-      this.productos.push({id, title, price, thumbnail});
+      this.productos.push({ id, title, price, thumbnail });
     }
     console.log(id);
     return product;
   }
 
-  updateProductById( {title, price, thumbnail}, {id} ) {
+  updateProductById({ title, price, thumbnail }, { id }) {
     let exist = false;
     let item = 0;
     for (let i = 0; i < this.productos.length; i++) {
@@ -53,7 +53,7 @@ class ApiHandler {
         item = i;
       }
     }
-    if (!exist) return{ error: 'producto no encontrado' };
+    if (!exist) return { error: 'producto no encontrado' };
     return this.productos[item];
   }
 };
