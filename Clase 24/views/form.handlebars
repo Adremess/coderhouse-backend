@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="./socket.io/socket.io.js"></script>
+</head>
+
+<body>
+  <br>
+  <br>
+
+  <h2 style="text-align: center; margin-top: 50px">Ingrese producto</h2>
+  <form style="width:450px; margin: 5% auto 0 auto;" class="prod-form" id="add" action="/productos" method="POST">
+    <div class="d-flex flex-column align-items-center">
+      <input type="text" name="title" class="form-control" placeholder="Nombre del Producto"
+        style="margin-bottom: 10px;">
+      <input type="text" name="price" class="form-control" placeholder="Precio del Producto"
+        style="margin-bottom: 10px;">
+      <input type="text" name="thumbnail" class="form-control" placeholder="Thumbnail del Producto"
+        style="margin-bottom: 10px;">
+      <div style="display: flex;">
+        <button id="formBtn" type="submit" class="btn btn-primary">Ingresar Producto</button>
+        <a href="/productos" style="margin-left: 30px;" type="submit" class="btn btn-primary">Ver Productos</a>
+      </div>
+    </div>
+  </form>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+<div>
+  {{#if data }}
+  <h1 style="text-align: center;">Productos Cargados</h1>
+    <table style="width: 900px; margin: 0 auto;" class="table table-dark table-hover">
+      <thead>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Foto</th>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    {{else}}
+      <p class="alert alert-danger">No se encontro data, lo siento!</p>
+  {{/if}}
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Chat Grupal
+  </div>
+  <div class="card-body">
+    <input class="form-control col-md-3" id="chat-mail" type="text" placeholder="email@email.com">
+    <p class="card-text border col-md-8 mt-4" id="chat-box"></p>
+    <div class="d-inline-flex">
+      <input class="form-control col-md-12 mr-2" id="chat-msg" type="text" placeholder="Ingresa un mensaje...">
+      <a href="#" class="btn btn-primary col-md-6" id="chat-btn">Enviar!</a>
+    </div>
+  </div>
+</div>
+
+  <script src="scripts/ioHandler.js"></script>
+</body>
+
+</html>
