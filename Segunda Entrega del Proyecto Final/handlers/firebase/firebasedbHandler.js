@@ -1,4 +1,3 @@
-import { response } from 'express';
 import db from '../../utils/firebase/index.js';
 
 const date = new Date();
@@ -113,7 +112,7 @@ class Productos {
             re = doc.data();
           })
         } else {
-          console.log('0 documents matched the query');
+          console.log(`No existe producto con id ${id}`);
         }
       });
       return re;

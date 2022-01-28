@@ -1,4 +1,3 @@
-// import { connection } from '../data/db/mongodb/config.js'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -8,8 +7,11 @@ let carrito;
 (async () => {
   switch (process.env.USE_DB) {
     case "MariaDb":
+      console.log('Using ', process.env.USE_DB)
       const { default: ProductosMaria } = await import('../handlers/mariadb/mariadbHandler.js').catch(err => console.log(err));
+      const { default: CarritoMaria } = await import('../handlers/mariadb/mariaCartHandler.js').catch(err => console.log(err));
       productos = ProductosMaria;
+      carrito = CarritoMaria;
       break;
 
     case 'FileFsDb':
@@ -27,7 +29,9 @@ let carrito;
     case 'FireBaseDb':
       console.log('Using ', process.env.USE_DB)
       const { default: ProductosFirebase } = await import('../handlers/firebase/firebasedbHandler.js').catch(err => console.log(err));
+      const { default: CarritoFirebase } = await import('../handlers/firebase/firebaseCartHandler.js').catch(err => console.log(err));
       productos = ProductosFirebase;
+      carrito = CarritoFirebase;
       break;
 
     default:
@@ -37,4 +41,4 @@ let carrito;
   }
 })();
 
-export { productos };
+export { productos, carrito };

@@ -1,5 +1,5 @@
 import FileHandler from './fileHandler.js';
-// import { ProductosHandler } from '../../routes/ProductosRoute.js';
+import { ProductosHandler } from '../../routes/ProductosRoute.js';
 
 class Carrito {
   constructor() {

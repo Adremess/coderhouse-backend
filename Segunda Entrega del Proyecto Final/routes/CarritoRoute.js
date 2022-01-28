@@ -1,8 +1,7 @@
 import express from 'express';
-import Carrito from '../handlers/filesystem/carritoHandler.js';
+import { carrito as carritoHandler } from '../handlers/dbCheck.js';
 
 const router = express.Router();
-const carritoHandler = new Carrito('Carrito');
 
 router.get('/:id/productos', async (req, res) => {
   try {

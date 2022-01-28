@@ -1,12 +1,10 @@
 import express from 'express';
 import { productos as ProdsApi } from '../handlers/dbCheck.js';
-import dotenv from 'dotenv';
 
-dotenv.config();
 const router = express.Router();
 
 const validateIsAdmin = (req, res, next) => {
-  if (process.env.ADMIN !== 'false') {
+  if (req.headers.isadmin !== 'false') {
     next();
   } else {
     res.json({
@@ -51,4 +49,5 @@ router.delete('/:id', validateIsAdmin, async (req, res) => {
   }
 });
 
+export const ProductosHandler = ProdsApi;
 export default router;

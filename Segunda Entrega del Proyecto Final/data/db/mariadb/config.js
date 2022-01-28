@@ -6,7 +6,8 @@ let mariadb = knex({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'clasecoder'
+    database: 'clasecoder',
+    dateStrings: true
   },
 });
 

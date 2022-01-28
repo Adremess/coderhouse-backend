@@ -10,10 +10,9 @@ class Productos {
 
   async existTable() {
     try {
-      await db.schema.hasTable(this.table).then(data => {
-        if (!data) this.createTable();
+      await db.schema.hasTable(this.table).then(table => {
+        if (!table) this.createTable();
       });
-      // return exist;
     } catch (error) {
       console.log(error);
     }
