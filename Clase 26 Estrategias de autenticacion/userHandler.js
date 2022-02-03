@@ -1,5 +1,6 @@
 const { mongoose } = require("./config/config.js");
 const UserSchema = require("./config/schema.js");
+const bcrypt = require("bcrypt");
 
 class Usuarios {
   constructor(tabla) {
@@ -9,7 +10,7 @@ class Usuarios {
   async saveUser({ username, password, direccion }) {
     const usuario = new UserSchema({
       user: username,
-      password: password,
+      password: bcrypt.hashSync(password, 10),
       email: direccion
     });
     await usuario.save();
@@ -20,6 +21,10 @@ class Usuarios {
     const user = await model.find({ user: usr });
     if (user.length === 0 ) return false;
     return user;
+  };
+
+  async compareHash(firstPw, secondPw) {
+    return bcrypt.compareSync(firstPw, secondPw);
   };
 
 };

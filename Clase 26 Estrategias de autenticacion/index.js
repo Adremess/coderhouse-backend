@@ -1,3 +1,4 @@
+const dotenv = require("dotenv").config();
 const express = require('express');
 let expressSession = require("express-session");
 const ApiHandler = require("./apiHandler");
@@ -9,8 +10,7 @@ let passport = require("passport");
 let passportStrategy = require('passport-local').Strategy;
 const userHandler = require("./userHandler.js");
 const app = express();
-const PORT = 8080;
-let usuarios = [];
+const PORT = process.env.PORT || 8080;
 const ApiController = new ApiHandler();
 
 // M I D D L E W A R E S
@@ -20,12 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 passport.use('login', new passportStrategy(async (username, password, done) => {
     let user = await userHandler.existUser(username);
-
     if (!user) return done(null, false);
-
-    if (user.password != password) return done(null, false);
-
-    return done(null, user);
+    if (!userHandler.compareHash(password, user[0].password)) return done(null, false);
+    return done(null, user[0]);
 }));
 passport.use('register', new passportStrategy({
     passReqToCallback: true
@@ -62,15 +59,12 @@ app.use(passport.session());
 // S E T T I N G S
 app.set("views", path.join(__dirname, 'views', 'ejs'))
 app.set('view engine', 'ejs');
-passport.serializeUser(async (user, done) => {
-    console.log('serialize: ', user);
-    done(null, user.username);
+passport.serializeUser((user, done) => {
+    done(null, user.user);
 })
 passport.deserializeUser(async (username, done) => {
-    console.log('unz 1: ', username);
     await userHandler.existUser(username).then(user => {
-        console.log('unz 2: ', user);
-        done(null, user._id);
+        done(null, user);
     });
 })
 
@@ -108,13 +102,13 @@ app.get('/login', (req, res, next) => {
     res.render('login');
 })
 
-app.post('/login', passport.authenticate('login', { failureRedirect: 'registro', successRedirect: 'datos' }));
+app.post('/login', passport.authenticate('login', { failureRedirect: 'login-error', successRedirect: 'datos' }));
 
 
 app.get('/datos', isAuth, (req, res, next) => {
     res.render('datos', {
         data: ApiController.getProductos(),
-        usuario: req.user
+        usuario: req.user[0]
     });
 })
 
@@ -130,6 +124,10 @@ app.get('/logout', (req, res, next) => {
 app.post('/productos', (req, res, next) => {
     ApiController.addProduct(req.body);
     res.redirect('/datos');
+});
+
+app.get('/login-error', (req, res, next) => {
+    res.render('login-error');
 });
 
 
