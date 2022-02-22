@@ -11,9 +11,12 @@ let passportStrategy = require('passport-local').Strategy;
 const userHandler = require("./userHandler.js");
 const args = require("./args.js");
 const { fork } = require("child_process");
+let cluster = require("cluster");
+const numCPUs = require("os").cpus().length;
 const app = express();
-const PORT = args.PORT || 8080;
+const PORT = parseInt(process.env.watch) || args.PORT || 8080;
 const ApiController = new ApiHandler();
+const modo_cluster = args.MODO;
 
 
 // M I D D L E W A R E S
@@ -60,8 +63,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // S E T T I N G S
+app.engine('html', require('ejs').renderFile)
 app.set("views", path.join(__dirname, 'views', 'ejs'))
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
+// app.set('view engine', 'ejs');
 passport.serializeUser((user, done) => {
   done(null, user.user);
 })
@@ -102,6 +107,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/login', (req, res, next) => {
+  console.log(`login ${PORT}`);
   res.render('login');
 })
 
@@ -135,22 +141,23 @@ app.get('/login-error', (req, res, next) => {
 
 app.get('/info', (req, res, next) => {
   res.render('info', {
+    procesadores: numCPUs,
     argv: process.argv.slice(2),
     platform: process.platform,
     version: process.version,
     memory: process.memoryUsage(),
     execPath: process.execPath,
     pid: process.pid,
-    cwd: process.cwd() 
+    cwd: process.cwd()
   });
 });
 
 app.get('/api/randoms', (req, res, next) => {
   let randoms;
   if (req.query.cant) {
-    randoms = fork("./randoms.js", [ req.query.cant ]);
+    randoms = fork("./randoms.js", [req.query.cant]);
   } else {
-    randoms = fork("./randoms.js", [ 100000000 ]);
+    randoms = fork("./randoms.js", [100000000]);
   }
   randoms.send('START');
   randoms.on('message', (message) => {
@@ -173,6 +180,15 @@ io.on('connection', async socket => {
   });
 })
 
-httpServer.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+if (modo_cluster === 'CLUSTER' && cluster.isMaster) {
+  console.log(`Master PID -> ${process.pid}`);
+
+  // Workers
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+} else {
+  httpServer.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
+}
