@@ -2,8 +2,9 @@ const express = require("express");
 const CORS = require("cors");
 const routes = require("./routes/index");
 const { config } = require("./config");
-const ConnectDB = require("./dto");
+const { ConnectDB } = require("./dto");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 class Server {
   constructor() {
@@ -16,6 +17,7 @@ class Server {
   }
 
   Settings() {
+    this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(CORS('*'));
     this.app.use(express.urlencoded({ extended: false }))

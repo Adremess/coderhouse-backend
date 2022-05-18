@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  thumbnail: {
+  foto: {
     type: String
   }
 });

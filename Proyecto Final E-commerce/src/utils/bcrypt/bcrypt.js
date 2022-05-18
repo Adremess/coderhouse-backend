@@ -1,18 +1,12 @@
 const bcrypt = require("bcrypt");
 
 class Bcrypt {
-  constructor() {
-    this.salt = await bcrypt.genSalt(10);
+  async createHash(pw) {
+    return bcrypt.hashSync(pw, bcrypt.genSaltSync(10), null);
   }
 
-  createHash(pw) {
-    const password = await bcrypt.hash(pw, this.salt);
-    return password;
-  }
-
-  verifyHash(pw, userPw) {
-    const validation = await bcrypt.compare(pw, userPw);
-    return validation;
+  async verifyHash(pw, userPw) {
+    return await bcrypt.compare(pw, userPw);
   }
 }
 

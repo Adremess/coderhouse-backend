@@ -1,8 +1,19 @@
+const mongoose = require("mongoose");
 const JWT = require("../../utils/jwt/jwt");
+const Bcrypt = require("../../utils/bcrypt/bcrypt");
 
 class Login {
   async Validate(req, res, next) {
-
+    const model = mongoose.model('users');
+    const user = await model.find({ usuario: req.body.usuario })
+    if (user.length === 0) return res.json({ error: 'nombre de usuario invalido' });
+      
+    if(! await Bcrypt.verifyHash(req.body.password, user[0].password)) return res.json({error: 'Contrasenia incorrecta'});
+    
+    delete req.headers['auth-token'];
+    const token = JWT.createToken(user[0]);
+    res.cookie('jwt', token, { maxAge: 180000 })
+    res.setHeader('auth-token', token).redirect('/');
   }
 }
 
