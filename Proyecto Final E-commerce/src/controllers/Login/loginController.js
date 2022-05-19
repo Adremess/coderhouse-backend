@@ -12,8 +12,9 @@ class Login {
     
     delete req.headers['auth-token'];
     const token = JWT.createToken(user[0]);
-    res.cookie('jwt', token, { maxAge: 180000 })
-    res.setHeader('auth-token', token).redirect('/');
+    req.user = req.body.usuario;
+    res.cookie('jwt', token, { maxAge: 180000 }).redirect('/productos');
+    // res.headers('auth-token', token).redirect('/');
   }
 }
 

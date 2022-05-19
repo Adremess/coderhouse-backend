@@ -21,12 +21,16 @@
         <div id="emailHelp" class="form-text">Usuario con el que se logueara.</div>
       </div>
       <div class="mb-3">
+        <label for="exampleInputTelefono" class="form-label">Telefono</label>
+        <input type="number" class="form-control" id="InputTelefono" aria-describedby="emailHelp" name="telefono">
+      </div>
+      <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" name="email">
         <div id="emailHelp" class="form-text">Email opcional con el que se logueara.</div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="exampleInputPassword" class="form-label">Password</label>
         <input type="password" class="form-control" id="InputPassword" name="password">
         <div class="col-auto">
           <span id="passwordHelpInline" class="form-text">
@@ -48,6 +52,11 @@
             Debe contener al menos una mayuscula.
           </span>
         </div>
+      </div>
+      <div class="mb-3">
+        <label for="InputConfirmPassword" class="form-label">Confirmar password</label>
+        <input type="password" class="form-control" id="InputConfirmPassword" aria-describedby="emailHelp" name="confirm-password">
+        <div id="passwordHelpInline" class="form-text">Confirme su password.</div>
       </div>
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>

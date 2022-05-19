@@ -14,12 +14,12 @@ class JsonWebToken {
 
   verifyToken(req, res, next) {
     const token = req.cookies.jwt;
-    if (!token) return res.json({ error: 'Acceso denegado, inicie sesion para poder ingresar.'});
+    if (!token) return res.render('logear', { error: 'DENEGADO', message: 'inicie sesion'});
     try {
       const verified = JsonWT.verify(token, jwt_key.private_key);
       next();
     } catch (error) {
-      res.json({ error: 'Sesion expirada, vuelva a iniciar sesion.' });
+      res.render('logear', { error: 'EXPIRADO', message: 'iniciar sesion' });
     }
   };
 };

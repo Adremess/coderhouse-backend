@@ -4,10 +4,11 @@ const UserSchema = require("../../dto/models/user");
 
 class Register {
   async NewUser(req, res, next) {
-    const { nombre, usuario, email, password } = req.body;
+    const { nombre, usuario, telefono, email, password } = req.body;
     const user = new UserSchema({
       nombre, 
-      usuario, 
+      usuario,
+      telefono, 
       email, 
       password: await BCRYPT.createHash(password)
     })
