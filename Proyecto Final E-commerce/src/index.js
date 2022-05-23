@@ -36,7 +36,7 @@ class Server {
   ServerUp() {
     this.app.listen(config.port, (err) => {
       if (!err) {
-        console.log(`Server up and running http://localhost:${process.env.PORT}`);
+        console.log(`Server up and running http://localhost:${config.port}`);
       } else {
         throw new Error('Error al levantar el servidor.');
       }

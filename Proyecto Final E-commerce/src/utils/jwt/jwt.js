@@ -8,7 +8,7 @@ class JsonWebToken {
       id: user._id
     }, jwt_key.private_key,
     {
-      expiresIn: '1m'
+      expiresIn: '3m'
     });
   };
 
