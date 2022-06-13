@@ -7,82 +7,148 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <title>Document</title>
+  <title>e-Commerce | Productos</title>
 </head>
 
 <body>
-  <div class="container">
-      <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Productos</button>
-          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ingresar producto</button>
-        </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-          <% if (data.status==='failed' ) { %>
-            <h2 class="text-center">Ingrese un producto</h2>
-            
-          <% } else {%>
-            <div class="card-group">
-              <% for (let i=0; i < data.length; i++) { %> 
-                <div class="card">
-                  <img src="<%= data[i].foto %> " class="card-img-top" alt="producto">
-                  <div class="card-body">
-                    <h5 class="card-title"><%= data[i].nombre %> </h5>
-                    <p class="card-text"><%= data[i].descripcion %></p>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Precio: $<%= data[i].precio %> </small>
-                  </div>
-                </div>
-              <% } %> 
-            </div>
-            <% } %>
-        </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-          <form action="/productos" method="post">
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Id</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="colFormLabel" name="id">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Nombre</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="colFormLabel" name="nombre">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Precio</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="colFormLabel" name="precio">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Stock</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="colFormLabel" name="stock">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Foto Url</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="colFormLabel" name="foto">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="colFormLabel" class="col-sm-2 col-form-label">Detalles del producto</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="colFormLabel" name="detalles">
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Agregar producto</button>
-          </form>
-        </div>
+  <style>
+    /* ===== Scrollbar CSS ===== */
+    /* Firefox */
+    * {
+      scrollbar-width: auto;
+      scrollbar-color: #e4e2e4 #ffffff;
+    }
+
+    /* Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: #ffffff;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #e4e2e4;
+      border-radius: 10px;
+      border: 3px solid #ffffff;
+    }
+  </style>
+  <div class="container my-5">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+          role="tab" aria-controls="nav-home" aria-selected="true">Productos</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+          role="tab" aria-controls="nav-profile" aria-selected="false">Ingresar producto</button>
       </div>
+    </nav>
+    <div class="tab-content flex" id="nav-tabContent">
+      <div class="tab-pane fade show active" style="display: flex !important; flex-direction:row; flex-wrap:wrap;"
+        id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <% if (data.status==='failed' ) { %>
+          <h2 class="text-center">Ingrese un producto</h2>
+
+          <% } else {%>
+            <% for (let i=0; i < data.length; i++) { %>
+              <!-- <div class="row"> -->
+              <div class="col-12 col-sm-8 col-md-6 col-lg-3" style="max-height: 500px; overflow: scroll;">
+                <div class="card">
+                    <img class="card-img" src="<%= data[i].foto %> " alt="Vans" style="max-height: 5%;">
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <%= data[i].nombre %>
+                      </h4>
+                      <div>
+                        <h6 class="card-subtitle mb-2 text-muted">ID: <span id="product-id">
+                            <%= data[i].id %>
+                          </span> </h6>
+                      </div>
+                      <p class="card-text">
+                        <%= data[i].detalles %>.
+                      </p>
+                      <div class="options d-flex flex-fill">
+                        <select class="form-select mr-1">
+                          <option selected>Color</option>
+                          <option value="1">Green</option>
+                          <option value="2">Blue</option>
+                          <option value="3">Red</option>
+                        </select>
+                        <select class="form-select ml-1">
+                          <option selected>Size</option>
+                          <option value="1">41</option>
+                          <option value="2">42</option>
+                          <option value="3">43</option>
+                        </select>
+                      </div>
+                      <div class="buy d-flex justify-content-between align-items-center">
+                        <div class="price text-success">
+                          <h5 class="mt-4">$<%= data[i].precio %>
+                          </h5>
+                        </div>
+                        <form onsubmit="return addCart(event)">
+                          <input type="hidden" name="id" value="<%= data[i].id %>">
+                          <input type="hidden" name="nombre" value="<%= data[i].nombre %>">
+                          <input type="hidden" name="precio" value="<%= data[i].precio %>">
+                          <input type="hidden" name="stock" value="<%= data[i].stock %>">
+                          <input type="hidden" name="foto" value="<%= data[i].foto %>">
+                          <input type="hidden" name="cantidad" value="1">
+                          <button type="submit" id="<%= data[i].id %>"
+                            class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <!-- </div> -->
+
+              <% } %>
+                <% } %>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+        <form action="/productos" method="post">
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="colFormLabel" name="id">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" name="nombre">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Precio</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="colFormLabel" name="precio">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Stock</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="colFormLabel" name="stock">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Foto Url</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" name="foto">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Detalles del producto</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" name="detalles">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar producto</button>
+        </form>
+      </div>
+    </div>
   </div>
+  <script src="/scripts/productos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>

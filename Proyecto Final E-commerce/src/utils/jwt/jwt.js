@@ -5,10 +5,12 @@ class JsonWebToken {
   createToken(user) {
     return JsonWT.sign({
       user:user.usuario,
-      id: user._id
+      id: user._id,
+      email: user.email
     }, jwt_key.private_key,
     {
-      expiresIn: '3m'
+      // DURACION SESION
+      expiresIn: '2m'
     });
   };
 
@@ -22,6 +24,12 @@ class JsonWebToken {
       res.render('logear', { error: 'EXPIRADO', message: 'iniciar sesion' });
     }
   };
+
+  getEmail(req) {
+    const token = req.cookies.jwt;
+    const { email } = JsonWT.verify(token, jwt_key.private_key);
+    return email;
+  }
 };
 
 module.exports = new JsonWebToken();

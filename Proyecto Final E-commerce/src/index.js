@@ -5,6 +5,7 @@ const { config } = require("./config");
 const { ConnectDB } = require("./dto");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const Products = require("./controllers/productos/productosController");
 
 class Server {
   constructor() {
@@ -36,6 +37,7 @@ class Server {
   ServerUp() {
     this.app.listen(config.port, (err) => {
       if (!err) {
+        // Products.loadProducts();
         console.log(`Server up and running http://localhost:${config.port}`);
       } else {
         throw new Error('Error al levantar el servidor.');

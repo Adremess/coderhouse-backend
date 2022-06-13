@@ -1,7 +1,28 @@
 const mongoose = require("mongoose");
 const ProductSchema = require("../../dto/models/product");
+const fetch = require("node-fetch");
+const fs = require("fs");
 
 class Productos {
+  async loadProducts() {
+    // FALTAN: auto
+    const data = fs.readFile('.\\src\\assets\\productos\\zapatillas.json', 'utf-8' , async (err, dat) => {
+      if (!err) {
+        let parseDat = JSON.parse(dat);
+        for (let i = 0; i < parseDat.length; i++) {
+          const model = mongoose.model("products");
+          const products = await model.find();
+          const id = products.length + 1;
+          parseDat[i].id = id;
+          await this.newProduct(parseDat[i]);
+
+        }
+      } else {
+        console.log(err)
+      }
+    });
+  }
+
   async newProduct(product) {
     const { id, nombre, precio, stock, foto, detalles } = product;
     const newItem = new ProductSchema({

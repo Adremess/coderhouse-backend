@@ -1,6 +1,7 @@
 const JTW = require("../../utils/jwt/jwt");
 const BCRYPT = require("../../utils/bcrypt/bcrypt");
 const UserSchema = require("../../dto/models/user");
+const Cart = require("../carrito/carritoController");
 
 class Register {
   async NewUser(req, res, next) {
@@ -14,6 +15,7 @@ class Register {
     })
     await user.save();
     // JTW.
+    await Cart.createCart(email);
     console.log(user);
     return res.redirect('/login')
   }
