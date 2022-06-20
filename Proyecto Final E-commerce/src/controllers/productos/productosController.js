@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const ProductSchema = require("../../dto/models/product");
-const fetch = require("node-fetch");
 const fs = require("fs");
 
 class Productos {
@@ -60,10 +59,6 @@ class Productos {
       return { foto, precio, stock, nombre, detalles };
     }
   }
-
-  // async deleteOneProduct(qer) {}
-
-  // async deleteAllProducts() {}
 }
 
 module.exports = new Productos();

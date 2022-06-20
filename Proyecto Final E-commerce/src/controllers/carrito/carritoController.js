@@ -3,12 +3,6 @@ const CartSchema = require("../../dto/models/cart");
 const JWT = require("../../utils/jwt/jwt");
 
 class Carrito {
-  async testt(req, res, next) {
-    console.log(req.body);
-    return req.body;
-    // res.redirect('/productos');
-  }
-
   async findCart(req, res, next) {
     const model = mongoose.model("carrito");
     const items = await model.find();
@@ -19,14 +13,6 @@ class Carrito {
   async createCart(email) {
     const newCart = new CartSchema({
       email,
-      // items: [{
-      //   id: req.body.items[0].id,
-      //   nombre: req.body.items[0].nombre,
-      //   precio: req.body.items[0].precio,
-      //   stock: req.body.items[0].stock,
-      //   cantidad: req.body.items[0].cantidad,
-      //   foto: req.body.items[0].foto
-      // }],
       items: [],
       direccion: {
         calle: '',
@@ -63,36 +49,18 @@ class Carrito {
     );
   }
 
-  // async findIndex(email, item_name) {
-  //   const model = mongoose.model("carrito");
-  //   const index = model.findOne(
-  //     { email: email },
-  //     function (err, doc) {
-  //       if (err) {
-  //         return err;
-  //       } else {
-  //         const index = doc.items.map(e => e.nombre).indexOf(item_name);
-  //         return index;
-  //       }
-  //     }
-  //   );
-  //   return index;
-  // }
-
   async removeProductFromCart(req, res, next) {
     const model = mongoose.model("carrito");
     const del = await model.updateOne(
-      { email: req.body.email },
+      { email: JWT.getEmail(req) },
       {
         $pull: {
-          items: { nombre: req.body.item }
+          items: { id: req.body.id }
         }
       }
     );
     res.send(del);
   }
-
-
 }
 
 module.exports = new Carrito();
